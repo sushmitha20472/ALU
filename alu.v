@@ -14,8 +14,7 @@ output reg [DW*2-1:0]res;
 
 reg [1:0] pipe_cnt;
 reg [DW-1:0] pipe_A, pipe_B;
-reg [3:0] pipe_cmd;
-reg pipe_active;
+
 
 reg signed [DW-1:0] s_A, s_B;
 reg signed [DW:0]   s_res;
@@ -35,8 +34,6 @@ begin
                 pipe_cnt <= 0;
                 pipe_A   <= 0;
                 pipe_B   <= 0;
-                pipe_cmd <= 0;
-                pipe_active <= 0;
             end
         else
            if(ce)
@@ -51,6 +48,9 @@ begin
                 E<=0;
                 err<=0;
                 oflow<=0;
+                pipe_cnt <= 0;
+                pipe_A   <= 0;
+                pipe_B   <= 0;
             end
             case(mode)
                 1:
