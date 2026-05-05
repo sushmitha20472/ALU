@@ -1,5 +1,3 @@
-
- 
 module alu2(clk,rst,inp_valid, mode,cmd,ce,opA,opB,cin,err,res,oflow,cout,G,L,E);
 parameter DW=8;
 parameter C=4;
