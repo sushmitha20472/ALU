@@ -192,7 +192,7 @@ begin
                     end
                     else if(tmpcnt9==2)
                     begin
-                        next_res <= tmpres9;
+                        res <= tmpres9;
                         tmpcnt9 <= 0;
                         v9 <= 0;
                     end
@@ -218,7 +218,7 @@ begin
                     end
                     else if(tmpcnt10==2)
                     begin
-                        next_res <= tmpres10;
+                        res <= tmpres10;
                         tmpcnt10 <= 0;
                         v10 <= 0;
                     end
