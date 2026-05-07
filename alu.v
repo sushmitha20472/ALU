@@ -1,8 +1,14 @@
+`default_nettype none
 
+module alu2(clk,rst,inp_valid,mode,cmd,ce,opA,opB,cin,err,res,oflow,cout,G,L,E);
+
+<<<<<<< HEAD
 
 
 module alu2(clk,rst,inp_valid,mode,cmd,ce,opA,opB,cin,err,res,oflow,cout,G,L,E);
 
+=======
+>>>>>>> 1484752f6b03830338e033cffd21e8e4268bf99d
 parameter DW=8;
 parameter C=4;
 
@@ -87,6 +93,7 @@ begin
             case(cmd)
 
             4'd0:
+<<<<<<< HEAD
             begin
                 if(inp_valid==2'b11)
                     {next_cout,next_res[DW-1:0]} <= opA + opB;
@@ -103,10 +110,37 @@ begin
                     else
                         next_res <= opA-opB;
                 end
+=======
+            begin
+                if(inp_valid==2'b11)
+                    {next_cout,next_res[DW-1:0]} <= opA + opB;
+>>>>>>> 1484752f6b03830338e033cffd21e8e4268bf99d
                 else
                     next_err <= 1;
             end
 
+<<<<<<< HEAD
+            4'd2:
+            begin
+                if(inp_valid==2'b11)
+                    {next_cout,next_res[DW-1:0]} <= opA + opB + cin;
+=======
+            4'd1:
+            begin
+                if(inp_valid==2'b11)
+                begin
+                    if(opA<opB)
+                        next_oflow <= 1;
+                    else
+                        next_res <= opA-opB;
+                end
+>>>>>>> 1484752f6b03830338e033cffd21e8e4268bf99d
+                else
+                    next_err <= 1;
+            end
+
+<<<<<<< HEAD
+=======
             4'd2:
             begin
                 if(inp_valid==2'b11)
@@ -115,6 +149,7 @@ begin
                     next_err <= 1;
             end
 
+>>>>>>> 1484752f6b03830338e033cffd21e8e4268bf99d
             4'd3:
             begin
                 if(inp_valid==2'b11)
@@ -151,6 +186,7 @@ begin
                 else
                     next_err <= 1;
             end
+<<<<<<< HEAD
 
             4'd7:
             begin
@@ -185,6 +221,42 @@ begin
                     v9 <= 1;
                 end
 
+=======
+
+            4'd7:
+            begin
+                if(inp_valid==2'b10 || inp_valid==2'b11)
+                    next_res <= opB - 1;
+                else
+                    next_err <= 1;
+            end
+
+            4'd8:
+            begin
+                if(inp_valid==2'b11)
+                begin
+                    if(opA>opB)
+                        next_G <= 1;
+                    else if(opA<opB)
+                        next_L <= 1;
+                    else
+                        next_E <= 1;
+                end
+                else
+                    next_err <= 1;
+            end
+
+            4'd9:
+            begin
+                if(inp_valid==2'b11)
+                begin
+                    tmpA9 <= opA + 1;
+                    tmpB9 <= opB + 1;
+                    tmpcnt9 <= 1;
+                    v9 <= 1;
+                end
+
+>>>>>>> 1484752f6b03830338e033cffd21e8e4268bf99d
                 if(v9)
                 begin
                     if(tmpcnt9==1)
@@ -217,6 +289,7 @@ begin
                     begin
                         tmpres10 <= tmpA10 * tmpB10;
                         tmpcnt10 <= 2;
+<<<<<<< HEAD
                     end
                     else if(tmpcnt10==2)
                     begin
@@ -224,6 +297,15 @@ begin
                         tmpcnt10 <= 0;
                         v10 <= 0;
                     end
+=======
+                    end
+                    else if(tmpcnt10==2)
+                    begin
+                        next_res <= tmpres10;
+                        tmpcnt10 <= 0;
+                        v10 <= 0;
+                    end
+>>>>>>> 1484752f6b03830338e033cffd21e8e4268bf99d
                 end
             end
 
@@ -246,6 +328,7 @@ begin
                         next_L <= 1;
                     else
                         next_E <= 1;
+<<<<<<< HEAD
                 end
                 else
                     next_err <= 1;
@@ -270,11 +353,40 @@ begin
                         next_L <= 1;
                     else
                         next_E <= 1;
+=======
+>>>>>>> 1484752f6b03830338e033cffd21e8e4268bf99d
                 end
                 else
                     next_err <= 1;
             end
 
+<<<<<<< HEAD
+=======
+            4'd12:
+            begin
+                if(inp_valid==2'b11)
+                begin
+                    s_A = $signed(opA);
+                    s_B = $signed(opB);
+                    s_res = s_A - s_B;
+
+                    next_res <= {{(DW-1){1'b0}},s_res};
+
+                    next_oflow <= (~opA[DW-1] & opB[DW-1] & s_res[DW-1]) |
+                                   ( opA[DW-1] & ~opB[DW-1] & ~s_res[DW-1]);
+
+                    if(s_A>s_B)
+                        next_G <= 1;
+                    else if(s_A<s_B)
+                        next_L <= 1;
+                    else
+                        next_E <= 1;
+                end
+                else
+                    next_err <= 1;
+            end
+
+>>>>>>> 1484752f6b03830338e033cffd21e8e4268bf99d
             default:
             begin
                 next_res <= 0;
