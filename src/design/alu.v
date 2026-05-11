@@ -280,8 +280,7 @@ end
 begin
     if(inp_valid == 2'b11)
     begin
-        // DIRECT RESULT
-        // TESTBENCH EXPECTS SAME-CYCLE OUTPUT
+        
         res <= (opA + 1) * (opB + 1);
 
         err    <= 0;
@@ -308,8 +307,6 @@ end
 begin
     if(inp_valid == 2'b11)
     begin
-        // DIRECT RESULT
-        // (OPA << 1) * OPB
         res <= ((opA << 1) * opB);
 
         err    <= 0;
